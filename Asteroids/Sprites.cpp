@@ -28,7 +28,7 @@ Asteroid::Asteroid(double x, double y, double r, Type_of_movement t, double s, d
 		start_y += ship_y;
 		x_pos = start_x;
 		y_pos = start_y;
-		std::cout << "X: " << start_x << " Y: " << start_y << " FinX: " << final_x << " FinY: " << final_y << std::endl;
+		//std::cout << "X: " << start_x << " Y: " << start_y << " FinX: " << final_x << " FinY: " << final_y << std::endl;  used for debugging
 		break;
 	}
 }
