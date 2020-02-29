@@ -19,7 +19,7 @@ int last_change = 0;
 // Texture and models loading
 std::string path1 = "..\\icons\\asteroiddd.png";
 std::string path2 = "..\\icons\\background.png";
-std::string path3 = "C:\\Users\\User\\Source\\Repos\\Asteroids\\icons\\arrow.png";
+std::string path3 = "..\\icons\\arrow.png";
 olc::Sprite* ast = new olc::Sprite(path1);
 olc::Sprite* bkg = new olc::Sprite(path2);
 olc::Sprite* arr = new olc::Sprite(path3);
