@@ -13,6 +13,7 @@ struct Asteroid {
 	double final_y;
 	double speed;
 	int direction;
+	bool danger;
 	Type_of_movement movement;
 
 	Asteroid(double x, double y, double r, Type_of_movement t, double s, double ship_x, double ship_y);

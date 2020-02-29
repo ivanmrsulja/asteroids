@@ -19,8 +19,10 @@ int last_change = 0;
 // Texture and models loading
 std::string path1 = "..\\icons\\asteroiddd.png";
 std::string path2 = "..\\icons\\background.png";
+std::string path3 = "C:\\Users\\User\\Source\\Repos\\Asteroids\\icons\\arrow.png";
 olc::Sprite* ast = new olc::Sprite(path1);
 olc::Sprite* bkg = new olc::Sprite(path2);
+olc::Sprite* arr = new olc::Sprite(path3);
 
 
 class Game : public olc::PixelGameEngine
@@ -127,6 +129,11 @@ public:
 			}
 
 			DrawSprite(a.x_pos - ast->width / 2, a.y_pos - ast->height / 2, ast, 0.3);
+			if (a.danger) {
+				DrawSprite(a.x_pos - arr->width / 2, 0, arr, 1);
+				DrawString(a.x_pos - arr->width, 20, std::to_string(sqrt(pow(a.x_pos - ship_x_position, 2) + pow(a.y_pos - ship_y_position, 2))), olc::Pixel(olc::RED), 1);
+				//DrawRect(a.x_pos - 5 / 2, 0, 10, 20, olc::Pixel(olc::BLUE));
+			}
 			//DrawCircle(a.x_pos, a.y_pos, a.radius, olc::Pixel(olc::BLUE));   //uncomment to see hitboxes
 			//DrawLine(a.start_x , a.start_y , a.final_x , a.final_y );        //uncomment to see path
 		}
@@ -152,6 +159,8 @@ public:
 private:
 	void calculate_asteroid_positions(float time) {
 		for (Asteroid& as : asteroids) {
+			double x1 = as.x_pos;
+			double y1 = as.y_pos;
 			as.x_pos += (time * GAME_SPEED)*as.speed * as.direction;
 			switch (as.movement) {
 			case LINEAR:
@@ -159,6 +168,14 @@ private:
 				break;
 			case PARABOLIC:
 				lagrange_quad_interpolation(as);
+
+				double distance = sqrt(pow(x1 - as.x_pos, 2) + pow(y1 - as.y_pos, 2));
+				if (distance > 1 && as.y_pos < 0 && as.y_pos > y1) {
+					as.danger = true;
+				}
+				else {
+					as.danger = false;
+				}
 				break;
 			}
 		}
@@ -210,7 +227,7 @@ private:
 	void lagrange_quad_interpolation(Asteroid& a) {
 		std::cout << ship_x_position << std::endl;
 		double y = (a.start_y * (((a.x_pos - ship_x_position) * (a.x_pos - a.final_x)) / ((a.start_x - ship_x_position) * (a.start_x - a.final_x)))) * (ship_y_position * (((a.x_pos - a.start_x) * (a.x_pos - a.final_x)) / ((ship_x_position - a.start_x) * (ship_x_position - a.final_x)))) * (a.final_y * (((a.x_pos - a.start_x) * (a.x_pos - ship_x_position)) / ((a.final_x - a.start_x) * (a.final_x - ship_x_position))));
-		std::cout << y << " " << a.x_pos << std::endl;
+		//std::cout << y << " " << a.x_pos << std::endl;
 		a.y_pos = y + 240;
 	}
 };

@@ -2,7 +2,7 @@
 #include "Sprites.h"
 #include <iostream>
 
-Asteroid::Asteroid(double x, double y, double r, Type_of_movement t, double s, double ship_x, double ship_y) : start_x(x), start_y(y), radius(r), movement(t), speed(s)
+Asteroid::Asteroid(double x, double y, double r, Type_of_movement t, double s, double ship_x, double ship_y) : start_x(x), start_y(y), radius(r), movement(t), speed(s), danger(false)
 {
 	if (start_x < 0) {
 		direction = 1;
