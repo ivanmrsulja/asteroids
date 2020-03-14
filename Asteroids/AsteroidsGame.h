@@ -225,7 +225,7 @@ private:
 	}
 
 	void lagrange_quad_interpolation(Asteroid& a) {
-		std::cout << ship_x_position << std::endl;
+		//std::cout << ship_x_position << std::endl;
 		double y = (a.start_y * (((a.x_pos - ship_x_position) * (a.x_pos - a.final_x)) / ((a.start_x - ship_x_position) * (a.start_x - a.final_x)))) * (ship_y_position * (((a.x_pos - a.start_x) * (a.x_pos - a.final_x)) / ((ship_x_position - a.start_x) * (ship_x_position - a.final_x)))) * (a.final_y * (((a.x_pos - a.start_x) * (a.x_pos - ship_x_position)) / ((a.final_x - a.start_x) * (a.final_x - ship_x_position))));
 		//std::cout << y << " " << a.x_pos << std::endl;
 		a.y_pos = y + 240;
